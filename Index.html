@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#0a4b4d" />
+  <title>Daily English Immersion</title>
+
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icon-192.png" />
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial; margin: 0; background: #f6f7f8; color:#111; }
+    header { background:#0a4b4d; color:white; padding:16px; }
+    .wrap { max-width: 820px; margin: 0 auto; padding: 16px; }
+    .card { background:white; border-radius:16px; padding:16px; box-shadow: 0 8px 24px rgba(0,0,0,.06); margin: 12px 0; }
+    .row { display:flex; gap:12px; flex-wrap:wrap; }
+    button { border:0; padding:12px 14px; border-radius:12px; cursor:pointer; font-weight:600; }
+    .primary { background:#00b871; color:#072; }
+    .secondary { background:#eef2f3; }
+    .danger { background:#ffefef; color:#a00; }
+    .pill { display:inline-flex; gap:8px; align-items:center; background:#eef2f3; padding:6px 10px; border-radius:999px; font-size:13px; }
+    textarea { width:100%; min-height:80px; border-radius:12px; border:1px solid #ddd; padding:10px; font-size:14px; }
+    .small { font-size: 13px; color:#444; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .grid { display:grid; grid-template-columns: 1fr; gap:12px; }
+    @media (min-width: 720px){ .grid{ grid-template-columns: 1fr 1fr; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;">
+        <div>
+          <div style="font-size:18px; font-weight:800;">Daily English Immersion</div>
+          <div class="small" style="color:#d8ffef;">Interface FR • Entraînement EN • Android • En ligne</div>
+        </div>
+        <div class="pill">
+          <span>🔥 Streak :</span> <strong id="streak">0</strong>
+          <span style="margin-left:10px;">🗣️ Minutes parlées :</span> <strong id="minutes">0</strong>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div class="card">
+      <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;">
+        <div>
+          <div style="font-size:16px; font-weight:800;">Session du jour</div>
+          <div class="small">Objectif : <span id="goal"></span></div>
+        </div>
+        <div class="row">
+          <button class="primary" id="startSession">Démarrer (25 min)</button>
+          <button class="secondary" id="markDone">Marquer comme fait</button>
+        </div>
+      </div>
+      <div class="small" style="margin-top:10px;">
+        Conseil : réponds <strong>à l’oral</strong>. Même si c’est simple.
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div style="font-weight:800; margin-bottom:8px;">🎭 Conversation (roleplay)</div>
+        <div class="small">Je te parle en anglais, tu réponds au micro. On transcrit.</div>
+        <div class="row" style="margin-top:10px;">
+          <button class="primary" id="speakPrompt">Lancer l’interlocuteur</button>
+          <button class="secondary" id="listen">🎤 Répondre</button>
+          <button class="danger" id="stop">Stop</button>
+        </div>
+        <div style="margin-top:10px;">
+          <div class="small">Phrase de l’interlocuteur (EN)</div>
+          <div class="card mono" style="background:#f9fbfb;" id="promptText">—</div>
+          <div class="small">Ta réponse (transcription)</div>
+          <div class="card mono" style="background:#f9fbfb;" id="userText">—</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div style="font-weight:800; margin-bottom:8px;">✅ Correction & “phrase naturelle”</div>
+        <div class="small">Colle ici ta phrase si besoin, puis “Corriger”. (V1 locale)</div>
+        <textarea id="toCorrect" placeholder="Ex: I want a coffee please"></textarea>
+        <div class="row" style="margin-top:10px;">
+          <button class="primary" id="correct">Corriger</button>
+          <button class="secondary" id="saveMistake">Ajouter au carnet d’erreurs</button>
+        </div>
+        <div style="margin-top:10px;">
+          <div class="small">Résultat</div>
+          <div class="card mono" style="background:#f9fbfb;" id="correction">—</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div style="font-weight:800; margin-bottom:8px;">🔁 Carnet d’erreurs (révision)</div>
+      <div class="small">Tes phrases reviennent régulièrement (J+1 / J+3 / J+7 / J+14).</div>
+      <div class="row" style="margin-top:10px;">
+        <button class="primary" id="review">Réviser 5 phrases</button>
+        <button class="secondary" id="clear">Vider</button>
+      </div>
+      <div style="margin-top:10px;" id="reviewBox"></div>
+    </div>
+
+    <div class="card">
+      <div style="font-weight:800; margin-bottom:8px;">📌 Installation</div>
+      <div class="small">
+        Quand l’app est hébergée en HTTPS : ouvre dans Chrome → menu ⋮ → <strong>Ajouter à l’écran d’accueil</strong>.
+        Elle devient une “appli” installée.
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
